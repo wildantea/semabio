@@ -1,0 +1,51 @@
+body.document-editor {
+    width: 210mm;
+    height: 270mm;
+    padding: 10mm 20mm 10mm 20mm;
+    margin: 5mm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+}
+
+body.document-header {
+    width: 210mm;
+    min-height: 50mm;
+    padding: 10mm 20mm 10mm 20mm;
+    margin: 5mm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+}
+
+body.document-editor td, body.document-editor th {
+    padding-left:0px;
+}
+
+body.document-editor table {
+    margin-top: 0;
+}
+
+body.document-editor table td > p {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 4px 0 3px 5px;
+}
+
+body.document-editor h1 {
+    margin-bottom: 1cm;
+}
+
+body.document-editor ol, body.document-editor ul, body.document-editor dl {
+    padding: 0;
+}
+
+body.document-editor p {
+    margin-top: 0;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}

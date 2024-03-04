@@ -1,0 +1,7 @@
+generate tanggal fixing error message
+        errorPlacement: function(error, element) {
+        //add this
+ 		else if (element.hasClass("tanggal")) {
+                 element.parent().parent().append(error);
+            }
+        },
