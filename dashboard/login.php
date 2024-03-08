@@ -1,6 +1,8 @@
 <?php
 session_start();
+include "inc/config.php";
 if (!isset($_SESSION['login'])) {
+$setting = $db->fetch_single_row("tb_ref_setting_conference","is_aktif",'Y');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +10,7 @@ if (!isset($_SESSION['login'])) {
     <meta charset="utf-8">
     <meta name="robots" content="noindex">
 
-    <title>Seminar Nasional Pertanian 2021</title>
+    <title><?=$setting->conference_name;?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="assets/login/css/login.css" media="all" rel="stylesheet" type="text/css">  
@@ -36,7 +38,7 @@ body {
     -->
     <div class="container">
         <div class="card-top card-container-top">
-        Seminar Nasional Pertanian 2021
+        <?=$setting->conference_name;?>
         </div>
         <div class="card card-container">
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->

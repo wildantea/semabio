@@ -78,7 +78,7 @@ $id_user = $_SESSION['id_user'];
     } elseif ($value->verifikasi=='Ditolak') {
        $ResultData[] = '<span class="btn btn-xs btn-danger" data-id='.$value->id.'><i class="fa fa-times"></i> Ditolak</span> <a href="'.base_url().'loj.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Lihat Surat Penolakan" data-id="'.$value->id.'"><i class="fa fa-print"></i> LOJ</a> '.$alasan_ditolak;
     } else {
-      $ResultData[] = '<span class="btn btn-xs btn-success" data-id="'.$value->id.'" data-toggle="tooltip" title="Selamat, Verifikasi abstract anda diterima"><i class="fa fa-check"></i> Diterima</span> <a href="'.base_url().'loa.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Print Letter of Acceptance" data-id="'.$value->id.'"><i class="fa fa-print"></i> LOA</a>';
+      $ResultData[] = '<span class="btn btn-xs btn-success" data-id="'.$value->id.'" data-toggle="tooltip" title="Selamat, Verifikasi abstract anda diterima"><i class="fa fa-check"></i> Diterima</span>';
     }
 
    if ($value->verifikasi=='Diterima') {
@@ -96,7 +96,8 @@ $id_user = $_SESSION['id_user'];
           } elseif ($value->status_abstract=='Revised') {
             $ResultData[] = '<span class="btn btn-xs btn-warning abstract-view" data-id="'.$value->id.'">Revised</span> '.$change_status_abstract;
           }else {
-            $ResultData[] = '<span class="btn btn-xs btn-success abstract-view" data-id="'.$value->id.'"><i class="fa fa-check"></i> Accepted</span> '.$chat_abstract.' <a href="'.base_admin().'modul/submission/abstract/invitation.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Print Letter of Invitation" data-id="'.$value->id.'"><i class="fa fa-print"></i> Invitation</a>';
+            $ResultData[] = '<span class="btn btn-xs btn-success abstract-view" data-id="'.$value->id.'"><i class="fa fa-check"></i> Accepted</span> '.$chat_abstract.' <a href="'.base_url().'loa.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Print Letter of Acceptance" data-id="'.$value->id.'"><i class="fa fa-print"></i> LOA</a> ';
+            //<a href="'.base_admin().'modul/submission/abstract/invitation.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Print Letter of Invitation" data-id="'.$value->id.'"><i class="fa fa-print"></i> Invitation</a>
           }
 
         if ($value->status_paper=='Waiting') {

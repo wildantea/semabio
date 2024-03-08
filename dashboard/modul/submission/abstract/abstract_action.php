@@ -21,18 +21,12 @@ switch ($_GET["act"]) {
       $id = $db->last_insert_id();
       $db->update('tb_data_abstract',array('status_abstract' => $_POST['status_abstract'],'approved_by' => $_SESSION['id_user']),'id',$_POST['id_abstract']);
   }
-  echo $id;
-    break;
-  case 'verifikasi':
-    $data = array(
-      'verifikasi' => $_POST['verifikasi'],
-      'tgl_verifikasi' => date('Y-m-d'),
-      'alasan_ditolak' => '',
-      'approved_by' => $_SESSION['id_user']
-    );
-    if ($_POST['verifikasi']=='Ditolak') {
-      $data['alasan_ditolak'] = $_POST['alasan_ditolak'];
-    } else {
+  //check if abstract is not accepted yet
+  $abstract = $db->fetch_single_row("tb_data_abstract","id",$_POST['id_abstract']);
+  if ($abstract->status_abstract!='Diterima') {
+    //check if payment is exist
+        $payment = $db->fetch_single_row("tb_data_payment","id_abstract",$_POST['id_abstract']);
+        if ($payment==false) {
             $get_due_date = $db->fetch_single_row("tb_ref_setting_conference","id",1);
             $invoice_urutan = $db->fetch_custom_single("select * from tb_data_payment order by inv_number desc");
             if ($invoice_urutan) {
@@ -59,6 +53,21 @@ switch ($_GET["act"]) {
                   );
                 $db->insert('tb_data_payment',$data_payment);
             }
+        }
+                
+
+  }
+  echo $id;
+    break;
+  case 'verifikasi':
+    $data = array(
+      'verifikasi' => $_POST['verifikasi'],
+      'tgl_verifikasi' => date('Y-m-d'),
+      'alasan_ditolak' => '',
+      'approved_by' => $_SESSION['id_user']
+    );
+    if ($_POST['verifikasi']=='Ditolak') {
+      $data['alasan_ditolak'] = $_POST['alasan_ditolak'];
     }
     $db->update('tb_data_abstract',$data,'id',$_POST['id_abstract']);
     break;

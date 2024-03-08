@@ -64,6 +64,8 @@ switch ($_GET["act"]) {
       $db->update('tb_data_payment',array('status_payment' => $status_payment,'date_verified' => date('Y-m-d')),'id',$pay_id->payment_id);
     }
 
+    exit();
+
 
 
 $email_user = $_POST['email_user'];

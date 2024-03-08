@@ -19,10 +19,10 @@ $presenter_name = $db->fetch_single_row("tb_data_abstract","id",$_POST['id_abstr
 $dir_name = str_replace(" ", "_", $presenter_name->presenter_name);
 
 $member = $db->fetch_single_row("tb_data_member","id_user",$presenter_name->id_user);
+$file_abstract = $db->fetch_custom_single('select * from tb_data_abstract_chat where id_abstract=? order by id desc',array('id_abstract' => $_POST['id_abstract']));
 
 //check kat
 $kategori_daftar = $db->fetch_single_row("kategori_daftar","id_kat",$member->id_kat_member);
-
 ?>
 <style type="text/css">
   .help-block {
@@ -69,6 +69,13 @@ if ($kategori_daftar->is_mahasiswa=='Y') {
   <?php
 }
 ?>
+
+ <div class="form-group">
+              <label for="Topic" class="control-label col-lg-2">File Abstract</label>
+            <div class="col-lg-3">
+<span class="form-control"><a target="_blank" href="<?=base_url();?>upload/abstracts/<?=$dir_name;?>/<?=$abstract->id;?>/<?=$file_abstract->file_name;?>">Download File Abstract</a></span>
+          </div>
+                      </div><!-- /.form-group -->
 
  <div class="form-group">
               <label for="Topic" class="control-label col-lg-2">Status</label>

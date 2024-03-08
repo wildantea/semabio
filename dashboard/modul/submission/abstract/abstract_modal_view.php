@@ -78,7 +78,7 @@ if($_SESSION['group_level']=='reviewer') {
                      foreach ($option as $isi => $val) {
 
                         if ($abstract->status_abstract==$isi) {
-                          echo "<option value='$data_edit->status_abstract' selected>$val</option>";
+                          echo "<option value='$abstract->status_abstract' selected>$val</option>";
                         } else {
                        echo "<option value='$isi'>$val</option>";
                           }
