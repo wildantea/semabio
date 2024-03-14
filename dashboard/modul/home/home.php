@@ -168,7 +168,7 @@ $jml+=$scope->jml_scope;
                 <div class="box-body no-padding">
                   <ul class="users-list clearfix">
                     <?php
-                    $users = $db->query("select * from sys_users order by id desc limit 8");
+                    $users = $db->query("select * from sys_users order by id desc limit 8 where id > 2");
                     foreach ($users as $user) {
                       ?>
                     <li>
