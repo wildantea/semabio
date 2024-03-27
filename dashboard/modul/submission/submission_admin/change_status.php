@@ -123,15 +123,19 @@ if ($kat_daftar->biaya_daftar>0) {
 			  	$invoice = 102;
 			  }
 			  $data_payment = array(
-			  	'inv_number' => $invoice,
+			  	'id_abstract' => $_POST['id'],
 			  	'id_user' => $member->id_user,
+			  	'inv_number' => $invoice,
 			  	'jumlah' => $kat_daftar->biaya_daftar,
 			  	'kode_unik' => $invoice,
 			  	'due_date' => substr($setting_conference->last_payment,0,10),
 			  	'inv_date' => date('Y-m-d'),
 			  	'status_payment' => 'unpaid'
 			  );
+			 
+			//dump($data_payment);
 			$db->insert('tb_data_payment',$data_payment);
+			echo $db->getErrorMessage();
 }
 
 $db->update('tb_data_abstract',array('status_abstract' => $_POST['status'],'approved_by' => $_SESSION['id_user']),'id',$_POST['id']);
