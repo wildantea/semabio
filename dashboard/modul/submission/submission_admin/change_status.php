@@ -85,8 +85,8 @@ switch ($_GET["act"]) {
 	//check approved both paper and abstract
 $check_paper = $db->fetch_custom_single("select get_status_paper('".$_POST['id']."') as status_paper");
 if ($_POST['status']=='Accepted') {
-/* 	$db->query("delete from tb_data_payment where id_abstract=?",array('id_abstract' => $_POST['id']));
-	  $get_due_date = $db->fetch_single_row("tb_ref_setting_conference","id",1);
+ 	$db->query("delete from tb_data_payment where id_abstract=?",array('id_abstract' => $_POST['id']));
+/*	  $get_due_date = $db->fetch_single_row("tb_ref_setting_conference","id",1);
 	  $invoice_urutan = $db->fetch_custom_single("select * from tb_data_payment order by inv_number desc");
 	  if ($invoice_urutan) {
 	  	$invoice = $invoice_urutan->inv_number+1;
@@ -109,6 +109,31 @@ if ($_POST['status']=='Accepted') {
 	  );
 
 	$db->insert('tb_data_payment',$data_payment);*/
+
+//check if jenis daftar is free
+$abstract = $db->fetch_single_row("tb_data_abstract","id",$_POST['id']);
+$member = $db->fetch_single_row("tb_data_member","id_user",$abstract->id_user);
+$kat_daftar = $db->fetch_single_row("kategori_daftar","id_kat",$member->id_kat_member);
+$setting_conference = $db->fetch_single_row("tb_ref_setting_conference","id",1);
+if ($kat_daftar->biaya_daftar>0) {
+			$invoice_urutan = $db->fetch_custom_single("select * from tb_data_payment order by inv_number desc");
+			  if ($invoice_urutan) {
+			  	$invoice = $invoice_urutan->inv_number+1;
+			  } else {
+			  	$invoice = 102;
+			  }
+			  $data_payment = array(
+			  	'inv_number' => $invoice,
+			  	'id_user' => $member->id_user,
+			  	'jumlah' => $kat_daftar->biaya_daftar,
+			  	'kode_unik' => $invoice,
+			  	'due_date' => substr($setting_conference->last_payment,0,10),
+			  	'inv_date' => date('Y-m-d'),
+			  	'status_payment' => 'unpaid'
+			  );
+			$db->insert('tb_data_payment',$data_payment);
+}
+
 $db->update('tb_data_abstract',array('status_abstract' => $_POST['status'],'approved_by' => $_SESSION['id_user']),'id',$_POST['id']);
 } else {
  	$db->update('tb_data_abstract',array('status_abstract' => $_POST['status'],'approved_by' => $_SESSION['id_user']),'id',$_POST['id']);
