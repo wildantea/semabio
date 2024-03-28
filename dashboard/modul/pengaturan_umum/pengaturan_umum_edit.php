@@ -83,6 +83,17 @@ $loa_date = getHariFromDate($data_edit->loa_date ).', '.tgl_indo($data_edit->loa
                 </div>
               </div><!-- /.form-group -->
               
+
+          
+              <div class="form-group">
+                <label for="Conference Place" class="control-label col-lg-2">Sekretariat <span style="color:#FF0000">*</span></label>
+                <div class="col-lg-10">
+                    <textarea id="editboxs" name="conference_secretary" class="editboxs"required><?=$data_edit->conference_secretary;?> </textarea>
+                </div>
+              </div><!-- /.form-group -->
+              
+
+
               <div class="form-group">
                 <label for="Conference Description" class="control-label col-lg-2">Conference Description <span style="color:#FF0000">*</span></label>
                 <div class="col-lg-10">
@@ -227,7 +238,39 @@ $loa_date = getHariFromDate($data_edit->loa_date ).', '.tgl_indo($data_edit->loa
 <link rel="stylesheet" type="text/css" href="<?=base_admin();?>assets/plugins/croppie/croppie.css">       
  <script type="text/javascript">
  $(document).ready(function(){
-  
+    $(".editboxs").ckeditor({
+    toolbarGroups: [{
+            "name": "basicstyles",
+            "groups": ["basicstyles"]
+        },
+        {
+            "name": "paragraph",
+            "groups": ["list"]
+        },
+        {
+            "name": "document",
+            "groups": ["mode"]
+        },
+        {
+            "name": "insert",
+            "groups": ["insert"]
+        },
+        {
+            "name": "styles",
+            "groups": ["styles"]
+        },
+        {
+            "name": "about",
+            "groups": ["about"]
+        }
+    ],
+    // Remove the redundant buttons from toolbar groups defined above.
+    removeButtons: 'Anchor,Styles,Strike,Source,Specialchar,PasteFromWord,Format,Table,HorizontalRule,About,Image'
+
+});
+ $('.editboxs').ckeditorGet().on('key', function(e) {
+    $('.editboxs').valid();
+});
       $(".edit-template-loa").click(function(){
         $("#loadnya").show();
         event.preventDefault();

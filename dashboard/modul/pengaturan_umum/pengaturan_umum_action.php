@@ -96,6 +96,7 @@ switch ($_GET["act"]) {
       "conference_city" => $_POST["conference_city"],
       "conference_chairman" => $_POST["conference_chairman"],
       "loa_date" => $_POST["loa_date"],
+       "conference_secretary" => $_POST["conference_secretary"],
       "last_payment" => $_POST["last_payment"].' '.$_POST['jam_selesai'],
    );
    
