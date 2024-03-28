@@ -76,7 +76,7 @@ $this->Cell(0,10,$setting->conference_site,0,0,'C');
 }
 }
 // Instanciation of inherited class
-$pdf = new PDF('L','mm','A5');
+$pdf = new PDF('L','mm','A4');
 
 $paper = $db->fetch_single_row("tb_data_abstract","id",$_GET['ab']);
 $pdf->set_user($paper->presenter_name,$paper->affiliation);
