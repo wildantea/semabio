@@ -85,12 +85,14 @@ if ($_SESSION['group_level']=='presenter') {
                                 <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
                               </div>
                               <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                                <input type="file" name="file_proof" class="file-upload-data">
+                                <input type="file" name="file_proof" accept="image/*" class="file-upload-data">
                               </span>
                               <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                             </div>
+                          <span>Pilih Gambar/Photo Bukti Bayar</span>
                           </div>
                         </div>
+
                       </div><!-- /.form-group -->
 
               <input type="hidden" name="id" value="<?=$data_edit->id;?>">

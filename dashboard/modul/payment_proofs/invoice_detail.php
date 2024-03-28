@@ -41,7 +41,7 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 	<div class="container-fluid invoice-container" id="invoice-table">
 		<div class="row">
 			<div class="col-sm-6">
-				<img src="../../../upload/logo/<?=$setting->conference_logo;?>" style="width: 200px;">
+				<img src="../../../upload/logo/<?=$setting->conference_logo;?>" style="width: 100px;">
 				<h3>Invoice <strong>#<?=$detail_data->inv_number;?></strong></h3>
 				<?php
 				if ($_SESSION['group_level']=='participant') {

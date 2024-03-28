@@ -5,6 +5,7 @@ $detail_data = $db->fetch_custom_single("select presenter_name, title_abstract, 
 on tb_data_payment.id_abstract=tb_data_abstract.id
 where tb_data_payment.id=?",array('id' => $_GET['id']));
 
+$setting = $db->fetch_single_row('tb_ref_setting_conference','is_aktif','Y');
 $full_name= $db->fetch_single_row('sys_users','id',$_SESSION['id_user']);
 
 $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
@@ -15,7 +16,7 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<title>Seminar Pertanian - Invoice</title>
+	<title><?=$setting->conference_name;?> - Invoice</title>
 	<link rel="stylesheet" type="text/css" href="invoice_css.css">
 	<link href="<?=base_admin();?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -39,13 +40,11 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 						<thead>
 							<tr>
 								<td>
-									<img src="../log.png">
+									<img src="../../../upload/logo/<?=$setting->conference_logo;?>">
 								</td>
 							
-								<td class="text-center" width="80%" style="text-align: right;"><span style="font-weight: bold;font-size: 15pt"> Seminar Nasional Pertanian 2021</span><br>Sekretariat : Jurusan Agroteknologi, <br>Fakultas Sains dan Teknologi,<br>
-			UIN Sunan Gunung Djati Bandung<br>
-			Jl. AH Nasution No.105 Bandung. 40614<br>
-			Email : agrotekconference@uinsgd.ac.id Website : agrotekconference.uinsgd.ac.id</td>
+								<td class="text-center" width="80%" style="text-align: right;">
+									<span style="font-weight: bold;font-size: 15pt"><?=$setting->conference_secretary;?></td>
 							</tr>
 						</thead>
 					</table>
@@ -53,28 +52,28 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 		
 		<div class="row">
 			<div class="col-xs-12" style="margin:3px">
-				<h5>Date : <?=date('Y-m-d');?> </h5>
+				<h5>Tanggal : <?=tgl_indo(date('Y-m-d'));?> </h5>
 				<div class="invoice-status" style="margin: 0;text-align: center;">
 					INVOICE
 				</div>
-				The Organizing committee of Seminar Nasional Pertanian 2021 acknowledges the following payment for registration fee,
+				Panitia Penyelenggara <?=$setting->conference_name;?> mengakui pembayaran berikut untuk biaya pendaftaran,
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong>Invoice Items</strong></h3>
+				<h3 class="panel-title"><strong>Item Pembayaran</strong></h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-condensed">
 						<thead style="font-weight: bold">
 							<tr>
-								<td >Abstract ID</td>
+								<td >ID Abstract</td>
 								<td>:</td>
 								<td><?=$detail_data->inv_number;?></td>
 							</tr>
 							<tr>
-								<td>Title</td>
+								<td>Judul</td>
 								<td>:</td>
 								<td><?=$detail_data->title_abstract;?></td>
 							</tr>
@@ -97,7 +96,7 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 								</td>
 							</tr>
 							<tr>
-								<td>Paid Amount</td>
+								<td>Jumlah Bayar</td>
 								<td>:</td>
 								<td>IDR <?=number_format($total_payment,0,",",".");?></td>
 							</tr>
@@ -105,7 +104,7 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 								<?php
 								$payment_proof = $db->fetch_custom_single('select * from tb_data_payment_detail inner join tb_data_payment_proof on payment_proof_id=tb_data_payment_proof.id where payment_id=?',array('id' => $_GET['id']))
 								?>
-								<td>Paid at</td>
+								<td>Tanggal Bayar</td>
 								<td>:</td>
 								<td><?=$payment_proof->date_payment;?></td>
 							</tr>
@@ -116,8 +115,8 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				Best regards,<br>
-Seminar Nasional Pertanian 2021 Committee
+				Salam Hormat,<br>
+Panitia <?=$setting->conference_name;?>
 </div>
 		</div>
 	</div>

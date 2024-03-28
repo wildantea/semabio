@@ -63,7 +63,7 @@ switch ($_GET["act"]) {
     foreach ($get_payment_id as $pay_id) {
       $db->update('tb_data_payment',array('status_payment' => $status_payment,'date_verified' => date('Y-m-d')),'id',$pay_id->payment_id);
     }
-
+ action_response($db->getErrorMessage());
     exit();
 
 

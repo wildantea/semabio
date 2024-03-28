@@ -11,8 +11,10 @@ class PDF extends FPDF
     public $affiliation;
 // Page header
 function Header(){
+    global $db;
+    $setting = $db->fetch_single_row("tb_ref_setting_conference","id",1);
     // Logo
-    $this->Image('../log.png',132,13,60);
+    $this->Image('../../../upload/logo/'.$setting->conference_logo,182,10,20);
     // Arial bold 15
     $this->SetFont('Arial','B',20);
     
@@ -63,12 +65,14 @@ function get_user() {
  
 function Footer()
 {
+    global $db;
+    $setting = $db->fetch_single_row("tb_ref_setting_conference","id",1);
     // Position at 1.5 cm from bottom
     $this->SetY(-13);
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Page number
-$this->Cell(0,10,'https://agrotekconference.uinsgd.ac.id/',0,0,'C');
+$this->Cell(0,10,$setting->conference_site,0,0,'C');
 }
 }
 // Instanciation of inherited class
