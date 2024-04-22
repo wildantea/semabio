@@ -54,7 +54,7 @@ $total_payment = $detail_data->jumlah+$detail_data->kode_unik;
 			<div class="col-xs-12" style="margin:3px">
 				<h5>Tanggal : <?=tgl_indo(date('Y-m-d'));?> </h5>
 				<div class="invoice-status" style="margin: 0;text-align: center;">
-					INVOICE
+					KWITANSI
 				</div>
 				Panitia Penyelenggara <?=$setting->conference_name;?> mengakui pembayaran berikut untuk biaya pendaftaran,
 			</div>
