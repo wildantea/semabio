@@ -1,4 +1,4 @@
- <?php 
+<?php 
 session_start();
 include "../../../inc/config.php";
 //update read status
@@ -86,6 +86,7 @@ if ($kategori_daftar->is_mahasiswa=='Y') {
                      $option = array(
                               'Diterima' => 'Diterima',
                               'Ditolak' => 'Ditolak',
+                              'Revisi' => 'Revisi'
                               );
                      foreach ($option as $isi => $val) {
 
@@ -101,7 +102,7 @@ if ($kategori_daftar->is_mahasiswa=='Y') {
                       </div><!-- /.form-group -->
 
    <div class="form-group show-alasan" <?=$show;?>>
-  <label for="Topic" class="control-label col-lg-2">Alasan Ditolak</label>
+  <label for="Topic" class="control-label col-lg-2 label-alasan">Alasan Ditolak</label>
    <div class="col-lg-10">
 <textarea class="form-control isi-note" id="isi-note"><?=$abstract->alasan_ditolak;?></textarea>
 </div>
@@ -142,6 +143,10 @@ if ($kategori_daftar->is_mahasiswa=='Y') {
   $('.status').on('change', function() {
     if ($(this).val()=='Ditolak') {
       $(".show-alasan").show();
+      $('.label-alasan').text('Alasan Ditolak');
+    } else if($(this).val()=='Revisi') {
+      $(".show-alasan").show();
+      $('.label-alasan').text('Catatan Revisi');
     } else {
       $(".show-alasan").hide();
     }

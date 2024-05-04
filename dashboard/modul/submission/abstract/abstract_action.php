@@ -66,10 +66,11 @@ switch ($_GET["act"]) {
       'alasan_ditolak' => '',
       'approved_by' => $_SESSION['id_user']
     );
-    if ($_POST['verifikasi']=='Ditolak') {
+    if ($_POST['verifikasi']=='Ditolak' or $_POST['verifikasi']=='Revisi') {
       $data['alasan_ditolak'] = $_POST['alasan_ditolak'];
     }
     $db->update('tb_data_abstract',$data,'id',$_POST['id_abstract']);
+    echo $db->getErrorMessage();
     break;
   case 'input_note_paper':
   //check if not exist

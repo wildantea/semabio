@@ -63,7 +63,7 @@ $id_user = $_SESSION['id_user'];
     if ($value->chat_abstract>0) {
       $chat_abstract = '<span class="btn btn-xs btn-success abstract-view" data-toggle="tooltip" title="You have unread message from reviewer" data-id='.$value->id.'><i class="fa fa-envelope"></i></span>';
     }
-    if ($value->verifikasi=='Ditolak') {
+    if ($value->verifikasi=='Ditolak' || $value->verifikasi=='Revisi') {
       $alasan_ditolak = $value->alasan_ditolak;
     }
 
@@ -77,6 +77,8 @@ $id_user = $_SESSION['id_user'];
       $ResultData[] = '<span class="btn btn-xs btn-warning" data-toggle="tooltip" title="Sedang Menunggu Verifikasi" data-id='.$value->id.'>Menunggu</span>';
     } elseif ($value->verifikasi=='Ditolak') {
        $ResultData[] = '<span class="btn btn-xs btn-danger" data-id='.$value->id.'><i class="fa fa-times"></i> Ditolak</span> <a href="'.base_url().'loj.php?id='.$value->id.'" target="_blank" class="btn btn-xs btn-primary" data-toggle="tooltip" data-title="Lihat Surat Penolakan" data-id="'.$value->id.'"><i class="fa fa-print"></i> LOJ</a> '.$alasan_ditolak;
+    } elseif ($value->verifikasi=='Revisi') {
+       $ResultData[] = '<span class="btn btn-xs btn-info" data-id='.$value->id.'><i class="fa fa-times"></i> Revisi</span> '.$alasan_ditolak;
     } else {
       $ResultData[] = '<span class="btn btn-xs btn-success" data-id="'.$value->id.'" data-toggle="tooltip" title="Selamat, Verifikasi abstract anda diterima"><i class="fa fa-check"></i> Diterima</span>';
     }

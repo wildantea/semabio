@@ -128,7 +128,7 @@ $datatable2->setDebug(1);
         $ResultData[] = '- '.$reviewer.' '.$btn_reviewer;
     }
 
-    if ($value->verifikasi=='Ditolak') {
+    if ($value->verifikasi=='Ditolak' || $value->verifikasi=='Revisi') {
       $alasan_ditolak = $value->alasan_ditolak;
     }
 
@@ -136,6 +136,8 @@ $datatable2->setDebug(1);
       $ResultData[] = '<span class="btn btn-xs btn-warning verifikasi" data-toggle="tooltip" title="Belum di Verifikasi" data-id='.$value->id.'>Belum</span>';
     } elseif ($value->verifikasi=='Ditolak') {
        $ResultData[] = '<span class="btn btn-xs btn-danger verifikasi" data-id='.$value->id.'><i class="fa fa-times"></i> Ditolak</span> '.$alasan_ditolak;
+    } elseif ($value->verifikasi=='Revisi') {
+       $ResultData[] = '<span class="btn btn-xs btn-info" data-id='.$value->id.'><i class="fa fa-times"></i> Revisi</span> '.$alasan_ditolak;
     } else {
       $ResultData[] = '<span class="btn btn-xs btn-success verifikasi" data-id="'.$value->id.'" data-toggle="tooltip" title="Verifikasi diterima"><i class="fa fa-check"></i> Diterima</span>';
     }
