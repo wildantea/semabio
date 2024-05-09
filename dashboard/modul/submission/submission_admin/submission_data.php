@@ -77,7 +77,7 @@ $columns = array(
 
 $datatable2->setDebug(1);
 
-  $datatable2->setFromQuery("tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id $join_reviewer where tb_data_abstract.id is not null $where_reviewer $scope $abstract $paper");
+  $datatable2->setFromQuery("tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id $join_reviewer where tb_data_abstract.id is not null $where_reviewer $scope $abstract $paper $verifikasi $bayar");
   $query = $datatable2->execQuery("select full_name,scope_name,id_user,tb_data_abstract.status_abstract,tb_data_abstract.title_abstract,tb_data_abstract.verifikasi,tb_data_abstract.alasan_ditolak, tb_data_abstract.presenter_name,sys_users.email,tb_data_abstract.id,fungsi_check_message_reviewer(tb_data_abstract.id) as msg_for_author,sys_users.id as id_user,fungsi_check_message_abstract(tb_data_abstract.id,'reviewer') as chat_abstract,
 (select status_payment from tb_data_payment where tb_data_payment.id_abstract=tb_data_abstract.id) as payment,
     fungsi_nama_reviewer(tb_data_abstract.id) as reviewer,get_status_paper(tb_data_abstract.id) as status_paper,affiliation from tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id $join_reviewer where tb_data_abstract.id is not null $where_reviewer $scope $abstract $paper $verifikasi $bayar",$columns);
