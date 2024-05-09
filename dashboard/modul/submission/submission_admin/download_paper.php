@@ -17,7 +17,7 @@ require_once('../../../inc/lib/pclzip.lib.php');
       array_pop($modul_dir);
 
      $modul_dir = implode(DIRECTORY_SEPARATOR, $modul_dir);
-     return $modul_dir.DIRECTORY_SEPARATOR."upload/abstracts".DIRECTORY_SEPARATOR;
+     return $modul_dir.DIRECTORY_SEPARATOR."upload/papers".DIRECTORY_SEPARATOR;
   }
 
   if ($_POST['scope']!='all') {
@@ -46,7 +46,7 @@ require_once('../../../inc/lib/pclzip.lib.php');
   }
 
 
-  $presenter_name = $db->query("select tb_data_abstract.id,presenter_name,(select file_name from tb_data_abstract_chat where id_abstract=tb_data_abstract.id and has_file='Y' order by id desc limit 1) as file_name from tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id where (select file_name from tb_data_abstract_chat where id_abstract=tb_data_abstract.id and has_file='Y' order by id desc limit 1) is not null $scope $abstract $paper $verifikasi $bayar");
+  $presenter_name = $db->query("select tb_data_abstract.id,presenter_name,(select file_name from tb_data_papers where id_abstract=tb_data_abstract.id and has_file='Y' order by id desc limit 1) as file_name from tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id where (select file_name from tb_data_abstract_chat where id_abstract=tb_data_abstract.id and has_file='Y' order by id desc limit 1) is not null $scope $abstract $paper $verifikasi $bayar");
 
 
 //$presenter_name = $db->query("select scope_name,presenter_name from tb_data_abstract inner join tb_ref_scope on id_scope=tb_ref_scope.id where ada=1 and id_scope=? group by presenter_name",array('id_scope' => $id_scope));
@@ -80,7 +80,7 @@ foreach ($presenter_name as $presenter) {
   }
 
 }
-$db->download_paper('data_abstract');
+$db->download_paper('data_papers');
 
 
 
