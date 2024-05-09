@@ -629,7 +629,7 @@ $html .= "</ul></li>";
      return $modul_dir.DIRECTORY_SEPARATOR."modul".DIRECTORY_SEPARATOR;
   }
 
-     function get_dir_paper($dir) {
+ function get_dir_paper($dir) {
       $modul_dir = explode(DIRECTORY_SEPARATOR, $dir);
      array_pop($modul_dir);
      array_pop($modul_dir);
@@ -642,6 +642,10 @@ $html .= "</ul></li>";
     $this->get_files_from_folder($fd,$put_into.'/');
   }
 
+   function downloadfolderabstract($fd,$put_into) {
+    $this->get_files_from_folder($fd,$put_into.'/');
+  }
+
   function download_paper($scope_name) {
     header("Content-Disposition: attachment; filename=" .$scope_name.".zip");
     header("Content-Type: application/zip");
@@ -651,6 +655,14 @@ $html .= "</ul></li>";
     exit();
   }
 
+  function download_abstract($name) {
+    header("Content-Disposition: attachment; filename=" .$name.".zip");
+    header("Content-Type: application/zip");
+    header("Content-Length: " . strlen($this -> file()));
+    flush();
+    echo $this -> file();
+    exit();
+  }
 
   /**
    * get uniqure name from filename
@@ -781,6 +793,10 @@ $html .= "</ul></li>";
                           }
                       }
     closedir($handle);
+  }
+  function put_file_to($file,$put_into) {
+    $fileContents = file_get_contents($file);
+    $this->add_file($fileContents, $put_into);
   }
   function downloadfolder($fd,$str_data,$put_into) {
     $this->get_files_from_folder($fd,$put_into.'/');

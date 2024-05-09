@@ -68,7 +68,7 @@
               <h3 class="box-title">Filter</h3>
             </div>
             <div class="box-body">
-           <form class="form-horizontal" id="filter_form" method="post" action="<?=base_admin();?>modul/submission/submission_admin/download_data.php" target="_blank">
+           <form class="form-horizontal" id="filter_form" method="post" action="<?=base_admin();?>modul/submission/submission_admin/download.php" target="_blank">
                    
               <div class="form-group">
                     <label for="Program studi" class="control-label col-lg-2">Article Scope</label>
@@ -139,7 +139,20 @@ group by id_scope ");
                         <label for="tags" class="control-label col-lg-2">&nbsp;</label>
                         <div class="col-lg-10">
                           <span id="filter" class="btn btn-primary"><i class="fa fa-refresh"></i> Filter</span>
-                          <button type="submit" class="btn btn-success"><i class="fa fa-cloud-download"></i> Download Data</button>
+
+                  <div class="btn-group">
+                  <button type="button" class="btn btn-success"><i class="fa fa-cloud-download"></i> Download Data</button>
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                     <ul class="dropdown-menu" role="menu">
+                    <li class="cetak-data"><button type="submit" name="download" value="data" class="btn cetak-data get-data"><i class="fa fa-cloud-download"></i> Download Data Excel</button></li>
+                    <li class="cetak-data"><button type="submit" name="download" value="abstract" class="btn cetak-data get-data"><i class="fa fa-cloud-download"></i> Download File Abstract</button></li>
+                    <li class="cetak-data"><button type="submit" name="download" value="paper" class="btn cetak-data get-data"><i class="fa fa-cloud-download"></i> Download File Paper</button></li>
+                  </ul>
+
+                </div>
                     </div>
                     </form>
             </div>

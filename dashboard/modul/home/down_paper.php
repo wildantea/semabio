@@ -8,7 +8,7 @@ $id_scope = $_GET['id'];
 
 
 
-$presenter_name = $db->query("select scope_name,presenter_name from tb_data_abstract inner join tb_ref_scope on id_scope=tb_ref_scope.id
+$presenter_name = $db->c("select scope_name,presenter_name from tb_data_abstract inner join tb_ref_scope on id_scope=tb_ref_scope.id
 where ada=1 and id_scope=? group by presenter_name",array('id_scope' => $id_scope));
 
 $i=1;
