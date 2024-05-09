@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Submission System</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="icon" href="<?=base_admin();?>assets/fav.png" sizes="32x32" />
     <!-- special jquery jQuery 2.1.3 -->
     <script src="<?=base_admin();?>assets/plugins/jQuery/jQuery-2.1.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?=base_admin();?>assets/plugins/jquery-ui/jquery-ui.min.css">

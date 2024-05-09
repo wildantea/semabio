@@ -9,7 +9,7 @@ $setting = $db->fetch_single_row("tb_ref_setting_conference","is_aktif",'Y');
 <head>
     <meta charset="utf-8">
     <meta name="robots" content="noindex">
-
+<link rel="icon" href="<?=base_admin();?>assets/fav.png" sizes="32x32" />
     <title><?=$setting->conference_name;?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
