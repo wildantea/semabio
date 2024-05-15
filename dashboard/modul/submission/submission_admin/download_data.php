@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once '../../../inc/lib/Writer.php';
-
-
 $writer = new XLSXWriter();
 $style =
         array (
@@ -70,14 +68,25 @@ $header = array(
 "Scope" => "string"
 );
 
-$scope = "";
-$abstract = "";
-$paper = "";
+  //set group by column
+  $id_user = $_SESSION['id_user'];
+  $where_reviewer = "";
+  $where = "";
+  if ($_SESSION['group_level']=='reviewer') {
+    $where = "where tb_data_reviewer.id_reviewer='".$id_user."'";
+    $where_reviewer = "and tb_data_abstract.id in(select tb_data_reviewer.id_abstract from tb_data_reviewer $where)";
+  } 
 
+  $btn_reviewer = "";
 
+  $scope = "";
+  $abstract = "";
+  $paper = "";
+  $verifikasi = "";
+  $bayar = "";
  if (isset($_POST['scope'])) {
     
-      if ($_POST['scope']!='all') {
+    if ($_POST['scope']!='all') {
         $scope = ' and id_scope="'.$_POST['scope'].'"';
       }
   
@@ -91,8 +100,16 @@ $paper = "";
         $paper = ' and get_status_paper(tb_data_abstract.id)="'.$_POST['paper'].'"';
       } else {
          $paper = ' and get_status_paper(tb_data_abstract.id)!=""';
+         $paper = '';
       }
-  
+
+      if ($_POST['verifikasi']!='all') {
+        $verifikasi = ' and verifikasi="'.$_POST['verifikasi'].'"';
+      }
+
+      if ($_POST['bayar']!='all') {
+        $bayar = ' and (select status_payment from tb_data_payment where tb_data_payment.id_abstract=tb_data_abstract.id)="'.$_POST['bayar'].'"';
+      }
 }
 
 
@@ -105,7 +122,7 @@ fungsi_nama_reviewer_single(tb_data_abstract.id,0) as reviewer_1,fungsi_nama_rev
 fungsi_get_notes_abstract(tb_data_abstract.id,0) as abs_note_1,fungsi_get_notes_abstract(tb_data_abstract.id,1) as abs_note_2,
 fungsi_get_notes_paper(tb_data_abstract.id,0) as paper_note_1,fungsi_get_notes_paper(tb_data_abstract.id,1) as paper_note_2,
 affiliation from tb_data_abstract inner join sys_users on tb_data_abstract.id_user=sys_users.id 
-inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id where tb_data_abstract.id is not null and ada=1 $scope $abstract $paper ");
+inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id $where_reviewer $scope $abstract $paper $verifikasi $bayar");
                     foreach ($temp_rec as $key) {
 
     if ($key->reviewer=="") {
@@ -116,25 +133,24 @@ inner join tb_ref_scope on tb_data_abstract.id_scope=tb_ref_scope.id where tb_da
         $reviewer = '- '.$reviewer;
     }
 
-
-                      $data_rec[] = array(
-                      				$key->full_name,
-															$key->email,
-															$key->all_authors,
-															$key->presenter_name,
-															$key->email_author,
-                              $key->reviewer_1,
-                              $key->abs_note_1,
-                              $key->paper_note_1,
-                              $key->reviewer_2,
-                              $key->abs_note_2,
-                              $key->paper_note_2,
-															$key->affiliation,
-															$key->title_abstract,
-														 strip_tags($key->content_abstract),
-															$key->keywords_abstract,
-															$key->scope_name
-                        );
+$data_rec[] = array(
+            $key->full_name,
+            $key->email,
+            $key->all_authors,
+            $key->presenter_name,
+            $key->email_author,
+            $key->reviewer_1,
+            $key->abs_note_1,
+            $key->paper_note_1,
+            $key->reviewer_2,
+            $key->abs_note_2,
+            $key->paper_note_2,
+            $key->affiliation,
+            $key->title_abstract,
+            strip_tags($key->content_abstract),
+            $key->keywords_abstract,
+            $key->scope_name
+);
 $reviewer ='';
             }
 
