@@ -113,6 +113,7 @@ function base_url()
 {
   $root='';
   $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+  $protocol = 'https://';
   $root = $protocol.$_SERVER['HTTP_HOST'];
   //$root .= dirname($_SERVER['SCRIPT_NAME']);
   $root .= "/".DIR_MAIN."/";
@@ -124,6 +125,7 @@ function base_admin()
 {
   $root='';
   $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+  $protocol = 'https://';
   $root = $protocol.$_SERVER['HTTP_HOST'];
   $root .= "/".DIR_ADMIN."/";
   return $root;
@@ -134,6 +136,7 @@ function base_index()
 {
   $root='';
    $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+   $protocol = 'https://';
   $root = $protocol.$_SERVER['HTTP_HOST'];
   //$root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
    $root .= "/".DIR_ADMIN."/";
